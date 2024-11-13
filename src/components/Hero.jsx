@@ -28,6 +28,7 @@ const Hero = () => {
   };
 
   //https://github.com/tailwindlabs/tailwindcss/discussions/3617 bg opacity credit simonswiss
+  // image credit https://unsplash.com/photos/a-semi-truck-driving-down-the-road-in-the-desert-Rhwj3CPwc6o
 
   return (
     <>
