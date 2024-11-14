@@ -10,7 +10,7 @@ posthog.init(import.meta.env.POSTHOG_API, {
 });
 
 createRoot(document.getElementById("root")).render(
-  <PostHogProvider>
+  <PostHogProvider  client={posthog}>
     <App />
   </PostHogProvider>
 );
