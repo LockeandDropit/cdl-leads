@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import Hero from "./Hero";
 
 const Agency = () => {
-
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
@@ -15,7 +14,7 @@ const Agency = () => {
   const [success, setSucess] = useState(false);
 
   console.log(preferedLocation);
-  
+
   const submit = () => {
     setDoc(doc(db, "leads", uuidv4()), {
       firstName: firstName,
@@ -123,8 +122,8 @@ const Agency = () => {
                       Highest trucking salary in the U.S.
                     </h3>
                     <p className="mt-1 text-gray-900">
-                      Some positions available to you with a CDL can end up providing
-                      substantial income.
+                      Some positions available to you with a CDL can end up
+                      providing substantial income.
                     </p>
                   </div>
                 </div>
@@ -155,6 +154,7 @@ const Agency = () => {
           </div>
         </div>
 
+        {/* <div className=" bg-blue-700 bg-opacity-90"> */}
         <div className=" bg-blue-700 bg-opacity-90">
           <div className="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-10">
@@ -182,9 +182,10 @@ const Agency = () => {
               <div className="hidden md:block mb-24 md:mb-0">
                 <img
                   className="rounded-xl"
-                  src="https://images.unsplash.com/photo-1671725501928-b7d85698ccd8?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src="https://images.pexels.com/photos/5439436/pexels-photo-5439436.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   alt="Image Description"
                 />
+                <div className="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 size-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6"></div>
               </div>
             </div>
           </div>
@@ -302,10 +303,11 @@ const Agency = () => {
           <div className="max-w-5xl px-4 xl:px-0 py-10 lg:pt-20  mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-14">
               <h2 className="text-gray-900 font-semibold text-2xl md:text-4xl md:leading-tight">
-               How to get your CDL in Minnesota
+                How to get your CDL in Minnesota
               </h2>
               <p className="mt-1 text-neutral-400">
-                If you don't already have your CDL, this is the perfect place for you to start
+                If you don't already have your CDL, this is the perfect place
+                for you to start
               </p>
             </div>
 
@@ -313,7 +315,7 @@ const Agency = () => {
               <div className="aspect-w-16 aspect-h-9 lg:aspect-none">
                 <img
                   className="w-full object-cover rounded-xl"
-                  src="https://images.unsplash.com/photo-1587614203976-365c74645e83?q=80&w=480&h=600&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  src="https://images.unsplash.com/photo-1504846257989-a76209d9d2ac?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                   alt="Image Description"
                 />
               </div>
@@ -339,7 +341,9 @@ const Agency = () => {
                       <span className="text-gray-900 font-semibold mr-1">
                         Tell us a little about yourself:
                       </span>
-                      Fill out the form at the top of the page and tell us a little bit about yourself along with your prefered location for training
+                      Fill out the form at the top of the page and tell us a
+                      little bit about yourself along with your prefered
+                      location for training
                     </p>
                   </div>
                 </div>
@@ -358,7 +362,8 @@ const Agency = () => {
                       <span className="text-gray-900 font-semibold mr-1">
                         We do the work for you:
                       </span>
-                      We find an employer that has open positions for paid CDL trainging
+                      We find an employer that has open positions for paid CDL
+                      trainging
                     </p>
                   </div>
                 </div>
@@ -377,7 +382,8 @@ const Agency = () => {
                       <span className="text-gray-900 font-semibold mr-1">
                         Interview:
                       </span>
-                      If the companies we find think you're a good fit, they'll reach out to you to start the interview process.
+                      If the companies we find think you're a good fit, they'll
+                      reach out to you to start the interview process.
                     </p>
                   </div>
                 </div>
@@ -396,7 +402,8 @@ const Agency = () => {
                       <span className="text-gray-900 font-semibold mr-1">
                         Start your career!
                       </span>
-                      If the company thinks you're a good fit, you can start your paid CDL training and begin your new career.
+                      If the company thinks you're a good fit, you can start
+                      your paid CDL training and begin your new career.
                     </p>
                   </div>
                 </div>
@@ -405,7 +412,6 @@ const Agency = () => {
                   className="group inline-flex items-center gap-x-2 py-2 px-3 bg-blue-600 font-medium text-sm text-white rounded-full focus:outline-none"
                   href="#"
                 >
-                 
                   Start the process
                 </a>
               </div>
@@ -482,7 +488,6 @@ const Agency = () => {
                         Last Name
                       </label>
                     </div>
-                   
 
                     <div className="relative">
                       <input
@@ -513,26 +518,19 @@ const Agency = () => {
                     </div>
 
                     <div className="relative">
-                    <select
-                                onChange={(e) =>
-                                  setPreferedLocation(e.target.value)
-                                }
-                                className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
-                              >
-                                <option selected="">Prefered Location</option>
-                                <option selected="No Preference">
-                                  No Preference
-                                </option>
-                                <option selected="Duluth">Duluth</option>
-                                <option selected="Minneapolis">
-                                  Minneapolis
-                                </option>
-                                <option selected="Fridely">Fridely</option>
-                                <option selected="Rochester">Rochester</option>
-                                <option selected="St. Paul">St. Paul</option>
-                                <option selected="St. Cloud">St. Cloud</option>
-                              </select>
-               
+                      <select
+                        onChange={(e) => setPreferedLocation(e.target.value)}
+                        className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                      >
+                        <option selected="No Preference">Prefered Location</option>
+                        <option value="No Preference">No Preference</option>
+                        <option value="Duluth">Duluth</option>
+                        <option value="Minneapolis">Minneapolis</option>
+                        <option value="Fridely">Fridely</option>
+                        <option value="Rochester">Rochester</option>
+                        <option value="St. Paul">St. Paul</option>
+                        <option value="St. Cloud">St. Cloud</option>
+                      </select>
                     </div>
 
                     <div className="relative">
@@ -562,8 +560,6 @@ const Agency = () => {
                         Phone
                       </label>
                     </div>
-
-               
                   </div>
 
                   <div className="mt-2">
@@ -627,8 +623,6 @@ const Agency = () => {
                     </a>
                   </div>
                 </div>
-
-         
               </div>
             </div>
           </div>

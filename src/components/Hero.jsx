@@ -10,9 +10,27 @@ const Hero = () => {
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [preferedLocation, setPreferedLocation] = useState(null);
   const [success, setSucess] = useState(false);
+  const date = new Date();
 
   console.log(preferedLocation);
-  
+
+  const [firstNameValidation, setFirstNameValidation] = useState();
+  const [lastNameValidation, setLastNameValidation] = useState();
+  const [emailValidation, setEmailValidation] = useState();
+
+  const handleCheckValidation = () => {
+    console.log(firstName);
+    if (!firstName) {
+      setFirstNameValidation("Please enter your first name");
+    } else if (!lastName) {
+      setLastNameValidation("Please enter your last name");
+    } else if (!email) {
+      setEmailValidation("Please enter your email");
+    } else {
+      submit();
+    }
+  };
+
   const submit = () => {
     setDoc(doc(db, "leads", uuidv4()), {
       firstName: firstName,
@@ -20,9 +38,15 @@ const Hero = () => {
       email: email,
       phoneNumber: phoneNumber ? phoneNumber : null,
       preferedLocation: preferedLocation,
+      dateSubmitted: date,
     })
       .then(() => {
         setSucess(true);
+        setFirstName(null);
+        setLastName(null);
+        setEmail(null);
+        setPreferedLocation(null);
+        setPhoneNumber(null);
       })
       .catch(() => {});
   };
@@ -49,7 +73,6 @@ const Hero = () => {
               <div className="flex justify-between items-center">
                 <a
                   className="flex-none font-semibold text-xl text-white focus:outline-none focus:opacity-80 "
-                
                   aria-label="Brand"
                 >
                   Find your career today!
@@ -71,391 +94,206 @@ const Hero = () => {
                     training so you can earn while you learn!
                   </p>
                 </div>
-                <form>
+                <div>
                   <div className="lg:max-w-xl lg:mx-auto ">
                     <div className="p-4 sm:p-7 flex flex-col bg-white rounded-2xl shadow-lg ">
+                      {/* {success ? () : ()} */}
                       <div className="">
-                        <p className="mb-4  font-semibold text-lg text-gray-800">
-                          Complete the following:
-                        </p>
-                        <div className="gap-4 space-y-2">
+                        {success ? (
                           <div>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                id="hs-hero-signup-form-floating-input-first-name"
-                                className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                                placeholder="John"
-                                onChange={(e) => setFirstName(e.target.value)}
-                              />
-                              <label
-                                htmlFor="hs-hero-signup-form-floating-input-first-name"
-                                className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 "
-                              >
-                                First name
-                              </label>
+                            {" "}
+                            <div className="gap-4 space-y-2">
+                              <div>
+                                <p className="mb-4  font-semibold text-lg text-gray-800">
+                                  Thanks for applying!
+                                </p>
+                                <p className="mb-4  font-semibold text-lg text-gray-800">
+                                  We'll send you a follow up email in the next 24 hours with next steps.
+                                </p>
+                              </div>
                             </div>
                           </div>
+                        ) : (
+                          <div className="gap-4 space-y-2">
+                            <div>
+                              <p className="mb-4  font-semibold text-lg text-gray-800">
+                                Tell us about yourself:
+                              </p>
+                              <div className="relative">
+                                <input
+                                  type="text"
+                                  id="hs-hero-signup-form-floating-input-first-name"
+                                  className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+                                    focus:pt-6
+                                    focus:pb-2
+                                    [&:not(:placeholder-shown)]:pt-6
+                                    [&:not(:placeholder-shown)]:pb-2
+                                    autofill:pt-6
+                                    autofill:pb-2"
+                                  placeholder="John"
+                                  onChange={(e) => setFirstName(e.target.value)}
+                                />
+                                <label
+                                  htmlFor="hs-hero-signup-form-floating-input-first-name"
+                                  className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                      peer-focus:scale-90
+                                      peer-focus:translate-x-0.5
+                                      peer-focus:-translate-y-1.5
+                                      peer-focus:text-gray-500 
+                                      peer-[:not(:placeholder-shown)]:scale-90
+                                      peer-[:not(:placeholder-shown)]:translate-x-0.5
+                                      peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                      peer-[:not(:placeholder-shown)]:text-gray-500 "
+                                >
+                                  First name
+                                </label>
+                                {firstNameValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {firstNameValidation}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
 
-                          <div>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                id="hs-hero-signup-form-floating-input-last-name"
-                                className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                                placeholder="Doe"
-                                onChange={(e) => setLastName(e.target.value)}
-                              />
-                              <label
-                                htmlFor="hs-hero-signup-form-floating-input-last-name"
-                                className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 "
-                              >
-                                Last name
-                              </label>
+                            <div>
+                              <div className="relative">
+                                <input
+                                  type="text"
+                                  id="hs-hero-signup-form-floating-input-last-name"
+                                  className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+                                    focus:pt-6
+                                    focus:pb-2
+                                    [&:not(:placeholder-shown)]:pt-6
+                                    [&:not(:placeholder-shown)]:pb-2
+                                    autofill:pt-6
+                                    autofill:pb-2"
+                                  placeholder="Doe"
+                                  onChange={(e) => setLastName(e.target.value)}
+                                />
+                                <label
+                                  htmlFor="hs-hero-signup-form-floating-input-last-name"
+                                  className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                  peer-focus:scale-90
+                                  peer-focus:translate-x-0.5
+                                  peer-focus:-translate-y-1.5
+                                  peer-focus:text-gray-500 
+                                  peer-[:not(:placeholder-shown)]:scale-90
+                                  peer-[:not(:placeholder-shown)]:translate-x-0.5
+                                  peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                  peer-[:not(:placeholder-shown)]:text-gray-500 "
+                                >
+                                  Last name
+                                </label>
+                                {lastNameValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {lastNameValidation}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div>
+                              <div className="relative">
+                                <input
+                                  type="email"
+                                  id="hs-hero-signup-form-floating-input-email"
+                                  className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+                                          focus:pt-6
+                                          focus:pb-2
+                                          [&:not(:placeholder-shown)]:pt-6
+                                          [&:not(:placeholder-shown)]:pb-2
+                                          autofill:pt-6
+                                          autofill:pb-2"
+                                  placeholder="you@email.com"
+                                  onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <label
+                                  htmlFor="hs-hero-signup-form-floating-input-email"
+                                  className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                        peer-focus:scale-90
+                                        peer-focus:translate-x-0.5
+                                        peer-focus:-translate-y-1.5
+                                        peer-focus:text-gray-500 
+                                        peer-[:not(:placeholder-shown)]:scale-90
+                                        peer-[:not(:placeholder-shown)]:translate-x-0.5
+                                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                        peer-[:not(:placeholder-shown)]:text-gray-500 "
+                                >
+                                  Email
+                                </label>
+                                {emailValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {emailValidation}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div>
+                              <div className="relative">
+                                <input
+                                  type="text"
+                                  id="hs-hero-signup-form-floating-input-company-name"
+                                  className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
+                                              focus:pt-6
+                                              focus:pb-2
+                                              [&:not(:placeholder-shown)]:pt-6
+                                              [&:not(:placeholder-shown)]:pb-2
+                                              autofill:pt-6
+                                              autofill:pb-2"
+                                  placeholder="Preline"
+                                  onChange={(e) =>
+                                    setPhoneNumber(e.target.value)
+                                  }
+                                />
+                                <label
+                                  htmlFor="hs-hero-signup-form-floating-input-company-name"
+                                  className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none
+                                                    peer-focus:scale-90
+                                                    peer-focus:translate-x-0.5
+                                                    peer-focus:-translate-y-1.5
+                                                    peer-focus:text-gray-500 
+                                                    peer-[:not(:placeholder-shown)]:scale-90
+                                                    peer-[:not(:placeholder-shown)]:translate-x-0.5
+                                                    peer-[:not(:placeholder-shown)]:-translate-y-1.5
+                                                    peer-[:not(:placeholder-shown)]:text-gray-500 "
+                                >
+                                  Phone Number
+                                </label>
+                              </div>
+                            </div>
+
+                            <div className="relative col-span-full">
+                              <div className="relative">
+                                <select
+                                  onChange={(e) =>
+                                    setPreferedLocation(e.target.value)
+                                  }
+                                  className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                                >
+                                  <option selected="No Preference">
+                                    Prefered Location
+                                  </option>
+                                  <option value="No Preference">
+                                    No Preference
+                                  </option>
+                                  <option value="Duluth">Duluth</option>
+                                  <option value="Minneapolis">
+                                    Minneapolis
+                                  </option>
+                                  <option value="Fridely">Fridely</option>
+                                  <option value="Rochester">Rochester</option>
+                                  <option value="St. Paul">St. Paul</option>
+                                  <option value="St. Cloud">St. Cloud</option>
+                                </select>
+                              </div>
                             </div>
                           </div>
-
-                          <div>
-                            <div className="relative">
-                              <input
-                                type="email"
-                                id="hs-hero-signup-form-floating-input-email"
-                                className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                                placeholder="you@email.com"
-                                onChange={(e) => setEmail(e.target.value)}
-                              />
-                              <label
-                                htmlFor="hs-hero-signup-form-floating-input-email"
-                                className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0]  peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 "
-                              >
-                                Email
-                              </label>
-                            </div>
-                          </div>
-
-                          <div>
-                            <div className="relative">
-                              <input
-                                type="text"
-                                id="hs-hero-signup-form-floating-input-company-name"
-                                className="peer p-4 block w-full border-gray-200 rounded-lg text-sm placeholder:text-transparent focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none
-                      focus:pt-6
-                      focus:pb-2
-                      [&:not(:placeholder-shown)]:pt-6
-                      [&:not(:placeholder-shown)]:pb-2
-                      autofill:pt-6
-                      autofill:pb-2"
-                                placeholder="Preline"
-                                onChange={(e) => setPhoneNumber(e.target.value)}
-                              />
-                              <label
-                                htmlFor="hs-hero-signup-form-floating-input-company-name"
-                                className="absolute top-0 start-0 p-4 h-full text-sm truncate pointer-events-none transition ease-in-out duration-100 border border-transparent origin-[0_0] peer-disabled:opacity-50 peer-disabled:pointer-events-none
-                        peer-focus:scale-90
-                        peer-focus:translate-x-0.5
-                        peer-focus:-translate-y-1.5
-                        peer-focus:text-gray-500 
-                        peer-[:not(:placeholder-shown)]:scale-90
-                        peer-[:not(:placeholder-shown)]:translate-x-0.5
-                        peer-[:not(:placeholder-shown)]:-translate-y-1.5
-                        peer-[:not(:placeholder-shown)]:text-gray-500 "
-                              >
-                                Phone Number
-                              </label>
-                            </div>
-                          </div>
-
-                          <div className="relative col-span-full">
-                            <div className="relative">
-                              <select
-                                onChange={(e) =>
-                                  setPreferedLocation(e.target.value)
-                                }
-                                className="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
-                              >
-                                <option selected="">Prefered Location</option>
-                                <option selected="No Preference">
-                                  No Preference
-                                </option>
-                                <option selected="Duluth">Duluth</option>
-                                <option selected="Minneapolis">
-                                  Minneapolis
-                                </option>
-                                <option selected="Fridely">Fridely</option>
-                                <option selected="Rochester">Rochester</option>
-                                <option selected="St. Paul">St. Paul</option>
-                                <option selected="St. Cloud">St. Cloud</option>
-                              </select>
-                            </div>
-
-                            <div
-                              id="hs-strong-password-popover"
-                              className="hidden absolute z-10 w-full bg-gray-100 rounded-lg p-4"
-                            >
-                              <div
-                                id="hs-strong-password-in-popover"
-                                data-hs-strong-password='{
-                          "target": "#hs-hero-signup-form-floating-input-new-password",
-                          "hints": "#hs-strong-password-popover",
-                          "stripClasses": "hs-strong-password:opacity-100 hs-strong-password-accepted:bg-teal-500 h-2 flex-auto rounded-full bg-blue-500 opacity-50 mx-1",
-                          "mode": "popover"
-                        }'
-                                className="flex mt-2 -mx-1"
-                              ></div>
-
-                              <h4 className="mt-3 text-sm font-semibold text-gray-800 ">
-                                Your password must contain:
-                              </h4>
-
-                              <ul className="space-y-1 text-sm text-gray-500 ">
-                                <li
-                                  data-hs-strong-password-hints-rule-text="min-length"
-                                  className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2"
-                                >
-                                  <span className="hidden" data-check>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                  </span>
-                                  <span data-uncheck>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <path d="M18 6 6 18" />
-                                      <path d="m6 6 12 12" />
-                                    </svg>
-                                  </span>
-                                  Minimum number of characters is 6.
-                                </li>
-                                <li
-                                  data-hs-strong-password-hints-rule-text="lowercase"
-                                  className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2"
-                                >
-                                  <span className="hidden" data-check>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                  </span>
-                                  <span data-uncheck>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <path d="M18 6 6 18" />
-                                      <path d="m6 6 12 12" />
-                                    </svg>
-                                  </span>
-                                  Should contain lowercase.
-                                </li>
-                                <li
-                                  data-hs-strong-password-hints-rule-text="uppercase"
-                                  className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2"
-                                >
-                                  <span className="hidden" data-check>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                  </span>
-                                  <span data-uncheck>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <path d="M18 6 6 18" />
-                                      <path d="m6 6 12 12" />
-                                    </svg>
-                                  </span>
-                                  Should contain uppercase.
-                                </li>
-                                <li
-                                  data-hs-strong-password-hints-rule-text="numbers"
-                                  className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2"
-                                >
-                                  <span className="hidden" data-check>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                  </span>
-                                  <span data-uncheck>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <path d="M18 6 6 18" />
-                                      <path d="m6 6 12 12" />
-                                    </svg>
-                                  </span>
-                                  Should contain numbers.
-                                </li>
-                                <li
-                                  data-hs-strong-password-hints-rule-text="special-characters"
-                                  className="hs-strong-password-active:text-teal-500 flex items-center gap-x-2"
-                                >
-                                  <span className="hidden" data-check>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <polyline points="20 6 9 17 4 12" />
-                                    </svg>
-                                  </span>
-                                  <span data-uncheck>
-                                    <svg
-                                      className="shrink-0 size-4"
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="24"
-                                      height="24"
-                                      viewBox="0 0 24 24"
-                                      fill="none"
-                                      stroke="currentColor"
-                                      strokeWidth="2"
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                    >
-                                      <path d="M18 6 6 18" />
-                                      <path d="m6 6 12 12" />
-                                    </svg>
-                                  </span>
-                                  Should contain special characters.
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
+                        )}
 
                         <div className="mt-7">
                           {success ? (
-                            <button
-                              onClick={submit}
-                              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                            >
+                            <button className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-green-600 text-white  focus:outline-none  disabled:opacity-50 disabled:pointer-events-none">
                               Success
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -474,7 +312,7 @@ const Hero = () => {
                             </button>
                           ) : (
                             <button
-                              onClick={submit}
+                              onClick={handleCheckValidation}
                               className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                             >
                               Find a match
@@ -484,7 +322,7 @@ const Hero = () => {
                       </div>
                     </div>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
