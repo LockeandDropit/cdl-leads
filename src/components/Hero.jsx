@@ -3,6 +3,8 @@ import { db } from "../../firebaseConfig";
 import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import posthog from "posthog-js";
+
 const Hero = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -51,7 +53,9 @@ const Hero = () => {
       .catch(() => {});
   };
 
-
+  posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
+    api_host: "https://us.i.posthog.com",
+  });
   //https://github.com/tailwindlabs/tailwindcss/discussions/3617 bg opacity credit simonswiss
   // image credit https://unsplash.com/photos/a-semi-truck-driving-down-the-road-in-the-desert-Rhwj3CPwc6o
 
