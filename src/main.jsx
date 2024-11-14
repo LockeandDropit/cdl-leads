@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 
-posthog.init(import.meta.env.VITE_POSTHOG_API, {
+posthog.init(import.meta.env.VITE_POSTHOG_KEY, {
   api_host: "https://us.i.posthog.com",
 });
 
