@@ -51,7 +51,6 @@ const Hero = () => {
       .catch(() => {});
   };
 
-  console.log("hmmm isdvosihv",import.meta.env.VITE_POSTHOG_KEY, "asdlg;sjdfglhaeiuf xxnxsjxnsxjknkn231njkb23jb232hj1 2kj312j3h12hj 4213k4hj23g4hj23 123kj4h12312jhgjkh2hj2jg2kjh22jh2gkjh2v3kj1 dq3e")
 
   //https://github.com/tailwindlabs/tailwindcss/discussions/3617 bg opacity credit simonswiss
   // image credit https://unsplash.com/photos/a-semi-truck-driving-down-the-road-in-the-desert-Rhwj3CPwc6o
