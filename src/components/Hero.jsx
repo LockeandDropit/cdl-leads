@@ -51,7 +51,7 @@ const Hero = () => {
       .catch(() => {});
   };
 
-  console.log("iS9x89vos2iujshv88",import.meta.env.VITE_POSTHOG_KEY,"a2s4lk48dlgiqm5lpKemY820sin3nTHos90Oxmqatmziemn39BnbqUsiIpd3oOmr")
+ 
 
   //https://github.com/tailwindlabs/tailwindcss/discussions/3617 bg opacity credit simonswiss
   // image credit https://unsplash.com/photos/a-semi-truck-driving-down-the-road-in-the-desert-Rhwj3CPwc6o
@@ -260,7 +260,7 @@ const Hero = () => {
                                                     peer-[:not(:placeholder-shown)]:-translate-y-1.5
                                                     peer-[:not(:placeholder-shown)]:text-gray-500 "
                                 >
-                                  Phone Number
+                                  Phone Number (optional)
                                 </label>
                               </div>
                             </div>
@@ -313,12 +313,15 @@ const Hero = () => {
                               </svg>
                             </button>
                           ) : (
+                            <>
                             <button
                               onClick={handleCheckValidation}
                               className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                             >
                               Find a match
                             </button>
+                            <p className="text-gray-500 text-sm mt-2">By submitting this information, you consent to receive calls and emails from Fulfil Inc. and potential employers regarding CDL training.</p>
+                            </>
                           )}
                         </div>
                       </div>
