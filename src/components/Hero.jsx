@@ -9,6 +9,8 @@ const Hero = () => {
   const [email, setEmail] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   const [preferedLocation, setPreferedLocation] = useState(null);
+  const [drugTestAgreement, setDrugTestAgreement] = useState(null)
+  const [backgroundCheckAgreement, setBackgroundCheckAgreement] = useState(null)
   const [success, setSucess] = useState(false);
   const date = new Date();
 
@@ -17,6 +19,8 @@ const Hero = () => {
   const [firstNameValidation, setFirstNameValidation] = useState();
   const [lastNameValidation, setLastNameValidation] = useState();
   const [emailValidation, setEmailValidation] = useState();
+  const [drugValidation, setDrugValidation] = useState()
+  const [backgroundValidation, setBackgroundValidation] = useState()
 
   const handleCheckValidation = () => {
     console.log(firstName);
@@ -26,7 +30,14 @@ const Hero = () => {
       setLastNameValidation("Please enter your last name");
     } else if (!email) {
       setEmailValidation("Please enter your email");
-    } else {
+    } else if (!drugTestAgreement) {
+setDrugValidation("Please complete this question")
+    } else if (!backgroundCheckAgreement) {
+      setBackgroundValidation("Please complete this question")
+    }
+else    
+    
+    {
       submit();
     }
   };
@@ -39,6 +50,8 @@ const Hero = () => {
       phoneNumber: phoneNumber ? phoneNumber : null,
       preferedLocation: preferedLocation,
       dateSubmitted: date,
+      drugTestAgreement: drugTestAgreement,
+      backgroundCheckAgreement: backgroundCheckAgreement
     })
       .then(() => {
         setSucess(true);
@@ -116,7 +129,7 @@ const Hero = () => {
                             </div>
                           </div>
                         ) : (
-                          <div className="gap-4 space-y-2">
+                          <div className="gap-4 space-y-3">
                             <div>
                               <p className="mb-4  font-semibold text-lg text-gray-800">
                                 Tell us about yourself:
@@ -288,6 +301,58 @@ const Hero = () => {
                                   <option value="St. Paul">St. Paul</option>
                                   <option value="St. Cloud">St. Cloud</option>
                                 </select>
+                              </div>
+                            </div>
+                            
+                            <div className="relative col-span-full">
+                              <div className="relative">
+                              <label className="text-gray-800 text-sm font-semibold mb-2 ">Are you willing to pass a pre-employment drug test?</label>
+                                <select
+                                  onChange={(e) =>
+                                    setDrugTestAgreement(e.target.value)
+                                  }
+                                  className="mt-1 mb-2 py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                                >
+                                  <option selected="">
+                                  Select your answer
+                                  </option>
+                                  <option value="Yes">
+                                    Yes
+                                  </option>
+                                  <option value="No">No</option>
+                     
+                                </select>
+                                {drugValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {drugValidation}
+                                  </p>
+                                )}
+                              </div>
+                            </div>
+                            
+                            <div className="relative col-span-full">
+                              <div className="relative">
+                                <label className="text-gray-800 text-sm font-semibold mb-2 ">Are you willing to pass a State and/or Federal background check?</label>
+                                <select
+                                  onChange={(e) =>
+                                    setBackgroundCheckAgreement(e.target.value)
+                                  }
+                                  className="mt-1 py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                                >
+                                  <option selected="">
+                                  Select your answer
+                                  </option>
+                                  <option value="Yes">
+                                    Yes
+                                  </option>
+                                  <option value="No">No</option>
+                     
+                                </select>
+                                {backgroundValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {backgroundValidation}
+                                  </p>
+                                )}
                               </div>
                             </div>
                           </div>
