@@ -155,7 +155,8 @@ const Agency = () => {
         </div>
 
         {/* <div className=" bg-blue-700 bg-opacity-90"> */}
-        <div className=" bg-blue-700 bg-opacity-90">
+        {/* benefits */}
+        {/* <div className=" bg-blue-700 bg-opacity-90">
           <div className="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-10">
               <h2 className="text-white font-semibold text-2xl md:text-4xl md:leading-tight">
@@ -189,9 +190,11 @@ const Agency = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="bg-white">
+
+          {/*   */}
+        {/* <div className="bg-white">
           <div className="max-w-5xl px-4 xl:px-0 py-10 mx-auto">
             <div className=" rounded-xl">
               <div className="p-4 lg:p-8 bg-gradient-to-tr from-blue-600 via-blue-600 to-blue-400 rounded-xl">
@@ -297,17 +300,17 @@ const Agency = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="bg-white">
-          <div className="max-w-5xl px-4 xl:px-0 py-10 lg:pt-20  mx-auto">
+          <div className="max-w-5xl px-4 xl:px-0 pb-10 lg:pt-20  mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-14">
               <h2 className="text-gray-900 font-semibold text-2xl md:text-4xl md:leading-tight">
-                How to get your CDL in Minnesota
+                How do I get my CDL?
               </h2>
               <p className="mt-1 text-neutral-400">
                 If you don't already have your CDL, this is the perfect place
-                for you to start
+                for you to start.
               </p>
             </div>
 
@@ -409,17 +412,17 @@ const Agency = () => {
                 </div>
 
                 <a
-                  className="group inline-flex items-center gap-x-2 py-2 px-3 bg-blue-600 font-medium text-sm text-white rounded-full focus:outline-none"
-                  href="#"
-                >
-                  Start the process
-                </a>
+                          href="#"
+                              className=" mt-4 w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                            >
+                              Find a match!
+                            </a>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-600">
+        {/* <div className="bg-blue-600">
           <div className="max-w-5xl px-4 xl:px-0 py-10 lg:py-20 mx-auto">
             <div className="max-w-3xl mb-10 lg:mb-14">
               <h2 className="text-white font-semibold text-2xl md:text-4xl md:leading-tight">
@@ -626,15 +629,15 @@ const Agency = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </main>
 
-      <footer className="relative overflow-hidden bg-white">
+      <footer className="relative overflow-hidden bg-blue-600">
         <div className="relative z-10">
           <div className="w-full max-w-5xl px-4 xl:px-0 py-10 lg:pt-16 mx-auto">
             <div className="inline-flex items-center">
-              <div className="border-s border-neutral-700 ps-5 ms-5">
-                <p className="text-sm text-gray-900">Minnesota CDL</p>
+              <div className="border-s border-white ps-5 ms-5">
+                <p className="text-sm text-white font-medium">Minnesota CDL</p>
               </div>
             </div>
           </div>

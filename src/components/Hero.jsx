@@ -3,6 +3,9 @@ import { db } from "../../firebaseConfig";
 import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import MN from "../../public/MN.svg"
+
+
 const Hero = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
@@ -87,6 +90,7 @@ else
                 >
                   CDL Minnesota
                 </a>
+                
               </div>
               <div className="flex justify-between items-center">
                 <a
@@ -104,12 +108,12 @@ else
 
               <div>
                 <div className="mt-4 mb-6 md:mb-12 max-w-xl lg:mx-auto ">
-                  <h1 className="mb-4 font-semibold text-white text-4xl lg:text-5xl ">
-                    Find paid CDL training in Minnesota
+                  <h1 className="mb-4 font-semibold text-white text-5xl lg:text-5xl ">
+                    Find Free CDL Training in Minnesota!
                   </h1>
                   <p className="text-white text-lg ">
-                    We match you with companies in Minnesota that offer paid CDL
-                    training so you can earn while you learn!
+                    We match you with companies that are hiring in Minnesota that offer free CDL
+                    training.
                   </p>
                 </div>
                 <div>
