@@ -21,6 +21,7 @@ const Hero = () => {
   const [emailValidation, setEmailValidation] = useState();
   const [drugValidation, setDrugValidation] = useState()
   const [backgroundValidation, setBackgroundValidation] = useState()
+  const [phoneNumberValidation, setPhoneNumberValidation] = useState()
 
   const handleCheckValidation = () => {
     console.log(firstName);
@@ -34,6 +35,8 @@ const Hero = () => {
 setDrugValidation("Please complete this question")
     } else if (!backgroundCheckAgreement) {
       setBackgroundValidation("Please complete this question")
+    } else if (!phoneNumber) {
+      setPhoneNumberValidation("Please enter your phone number")
     }
 else    
     
@@ -273,8 +276,13 @@ else
                                                     peer-[:not(:placeholder-shown)]:-translate-y-1.5
                                                     peer-[:not(:placeholder-shown)]:text-gray-500 "
                                 >
-                                  Phone Number (optional)
+                                  Phone Number
                                 </label>
+                                {phoneNumberValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {phoneNumberValidation}
+                                  </p>
+                                )}
                               </div>
                             </div>
 
