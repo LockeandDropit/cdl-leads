@@ -3,7 +3,9 @@ import { db } from "../../firebaseConfig";
 import { setDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
-import MN from "../../public/MN.svg"
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+
+
 
 
 const Hero = () => {
@@ -11,13 +13,15 @@ const Hero = () => {
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
-  const [preferedLocation, setPreferedLocation] = useState(null);
+  // const [preferedLocation, setPreferedLocation] = useState(null);
   const [drugTestAgreement, setDrugTestAgreement] = useState(null)
   const [backgroundCheckAgreement, setBackgroundCheckAgreement] = useState(null)
+  const [resume, setResume] = useState(null)
+  const [finalResume, setFinalResume] = useState(null)
   const [success, setSucess] = useState(false);
   const date = new Date();
 
-  console.log(preferedLocation);
+  // console.log(preferedLocation);
 
   const [firstNameValidation, setFirstNameValidation] = useState();
   const [lastNameValidation, setLastNameValidation] = useState();
@@ -25,6 +29,7 @@ const Hero = () => {
   const [drugValidation, setDrugValidation] = useState()
   const [backgroundValidation, setBackgroundValidation] = useState()
   const [phoneNumberValidation, setPhoneNumberValidation] = useState()
+  const [resumeValidation, setResumeValidation] = useState()
 
   const handleCheckValidation = () => {
     console.log(firstName);
@@ -40,6 +45,8 @@ setDrugValidation("Please complete this question")
       setBackgroundValidation("Please complete this question")
     } else if (!phoneNumber) {
       setPhoneNumberValidation("Please enter your phone number")
+    } else if (!resume) {
+      setResumeValidation("Please upload a copy of your resume")
     }
 else    
     
@@ -54,7 +61,8 @@ else
       lastName: lastName,
       email: email,
       phoneNumber: phoneNumber ? phoneNumber : null,
-      preferedLocation: preferedLocation,
+      // preferedLocation: preferedLocation,
+      resume: resume,
       dateSubmitted: date,
       drugTestAgreement: drugTestAgreement,
       backgroundCheckAgreement: backgroundCheckAgreement
@@ -64,10 +72,35 @@ else
         setFirstName(null);
         setLastName(null);
         setEmail(null);
-        setPreferedLocation(null);
+        // setPreferedLocation(null);
         setPhoneNumber(null);
       })
       .catch(() => {});
+  };
+
+
+  const uploadResumeToFirebase = async (x) => {
+    const storage = getStorage();
+    const resumeRef = ref(storage, "resumes/" + "/resume.pdf");
+
+    const file = x;
+
+    await uploadBytes(resumeRef, file)
+      .then((snapshot) => {
+        console.log("good to go");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    await getDownloadURL(resumeRef).then((response) => {
+      setResume(response)
+     
+        .then(() => {
+          // setResume(response);
+        })
+   
+    });
   };
 
  
@@ -139,7 +172,7 @@ else
                           <div className="gap-4 space-y-3">
                             <div>
                               <p className="mb-4  font-semibold text-lg text-gray-800">
-                                Tell us about yourself:
+                                Please complete the following:
                               </p>
                               <div className="relative">
                                 <input
@@ -290,7 +323,7 @@ else
                               </div>
                             </div>
 
-                            <div className="relative col-span-full">
+                            {/* <div className="relative col-span-full">
                               <div className="relative">
                                 <select
                                   onChange={(e) =>
@@ -312,9 +345,12 @@ else
                                   <option value="Rochester">Rochester</option>
                                   <option value="St. Paul">St. Paul</option>
                                   <option value="St. Cloud">St. Cloud</option>
+                                  <option value="Other">
+                                    Other
+                                  </option>
                                 </select>
                               </div>
-                            </div>
+                            </div> */}
                             
                             <div className="relative col-span-full">
                               <div className="relative">
@@ -369,6 +405,33 @@ else
                             </div>
                           </div>
                         )}
+
+<div className="max-w-sm mt-3 sm:mt-5">
+  <form>
+  <label className="text-gray-800 text-sm font-semibold mb-2 ">Please upload a copy of your resume.</label>
+    <label className="block mt-2">
+      <span className="sr-only">Please upload your resume</span>
+      <input type="file" accept=".pdf" className="block w-full text-sm text-gray-500
+        file:me-4 file:py-2 file:px-4
+        file:rounded-lg file:border-0
+        file:text-sm file:font-semibold
+        file:bg-blue-600 file:text-white
+        hover:file:bg-blue-700
+        file:disabled:opacity-50 file:disabled:pointer-events-none
+      
+      "
+      onChange={(event) =>
+              uploadResumeToFirebase(event.target.files[0])
+            } />
+    </label>
+  </form>
+  {resumeValidation && (
+                                  <p className="text-red-500 text-sm">
+                                    {resumeValidation}
+                                  </p>
+                                )}
+</div>
+
 
                         <div className="mt-7">
                           {success ? (
