@@ -5,19 +5,17 @@ import { doc } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-
-
-
 const Hero = () => {
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
   const [email, setEmail] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState(null);
   // const [preferedLocation, setPreferedLocation] = useState(null);
-  const [drugTestAgreement, setDrugTestAgreement] = useState(null)
-  const [backgroundCheckAgreement, setBackgroundCheckAgreement] = useState(null)
-  const [resume, setResume] = useState(null)
-  const [finalResume, setFinalResume] = useState(null)
+  const [drugTestAgreement, setDrugTestAgreement] = useState(null);
+  const [backgroundCheckAgreement, setBackgroundCheckAgreement] =
+    useState(null);
+  const [resume, setResume] = useState(null);
+  const [finalResume, setFinalResume] = useState(null);
   const [success, setSucess] = useState(false);
   const date = new Date();
 
@@ -26,10 +24,10 @@ const Hero = () => {
   const [firstNameValidation, setFirstNameValidation] = useState();
   const [lastNameValidation, setLastNameValidation] = useState();
   const [emailValidation, setEmailValidation] = useState();
-  const [drugValidation, setDrugValidation] = useState()
-  const [backgroundValidation, setBackgroundValidation] = useState()
-  const [phoneNumberValidation, setPhoneNumberValidation] = useState()
-  const [resumeValidation, setResumeValidation] = useState()
+  const [drugValidation, setDrugValidation] = useState();
+  const [backgroundValidation, setBackgroundValidation] = useState();
+  const [phoneNumberValidation, setPhoneNumberValidation] = useState();
+  const [resumeValidation, setResumeValidation] = useState();
 
   const handleCheckValidation = () => {
     console.log(firstName);
@@ -40,17 +38,14 @@ const Hero = () => {
     } else if (!email) {
       setEmailValidation("Please enter your email");
     } else if (!drugTestAgreement) {
-setDrugValidation("Please complete this question")
+      setDrugValidation("Please complete this question");
     } else if (!backgroundCheckAgreement) {
-      setBackgroundValidation("Please complete this question")
+      setBackgroundValidation("Please complete this question");
     } else if (!phoneNumber) {
-      setPhoneNumberValidation("Please enter your phone number")
+      setPhoneNumberValidation("Please enter your phone number");
     } else if (!resume) {
-      setResumeValidation("Please upload a copy of your resume")
-    }
-else    
-    
-    {
+      setResumeValidation("Please upload a copy of your resume");
+    } else {
       submit();
     }
   };
@@ -65,7 +60,7 @@ else
       resume: resume,
       dateSubmitted: date,
       drugTestAgreement: drugTestAgreement,
-      backgroundCheckAgreement: backgroundCheckAgreement
+      backgroundCheckAgreement: backgroundCheckAgreement,
     })
       .then(() => {
         setSucess(true);
@@ -77,7 +72,6 @@ else
       })
       .catch(() => {});
   };
-
 
   const uploadResumeToFirebase = async (x) => {
     const storage = getStorage();
@@ -94,16 +88,11 @@ else
       });
 
     await getDownloadURL(resumeRef).then((response) => {
-      setResume(response)
-     
-        .then(() => {
-          // setResume(response);
-        })
-   
+      setResume(response).then(() => {
+        // setResume(response);
+      });
     });
   };
-
- 
 
   //https://github.com/tailwindlabs/tailwindcss/discussions/3617 bg opacity credit simonswiss
   // image credit https://unsplash.com/photos/a-semi-truck-driving-down-the-road-in-the-desert-Rhwj3CPwc6o
@@ -123,7 +112,6 @@ else
                 >
                   CDL Minnesota
                 </a>
-                
               </div>
               <div className="flex justify-between items-center">
                 <a
@@ -145,8 +133,8 @@ else
                     Find Free CDL Training in Minnesota!
                   </h1>
                   <p className="text-white text-lg ">
-                    We match you with companies that are hiring in Minnesota that offer free CDL
-                    training.
+                    We match you with companies that are hiring in Minnesota
+                    that offer free CDL training.
                   </p>
                 </div>
                 <div>
@@ -163,7 +151,8 @@ else
                                   Thanks for applying!
                                 </p>
                                 <p className="mb-4  font-semibold text-lg text-gray-800">
-                                  We'll send you a follow up email in the next 24 hours with next steps.
+                                  We'll send you a follow up email in the next
+                                  24 hours with next steps.
                                 </p>
                               </div>
                             </div>
@@ -351,10 +340,13 @@ else
                                 </select>
                               </div>
                             </div> */}
-                            
+
                             <div className="relative col-span-full">
                               <div className="relative">
-                              <label className="text-gray-800 text-sm font-semibold mb-2 ">Are you willing to pass a pre-employment drug test?</label>
+                                <label className="text-gray-800 text-sm font-semibold mb-2 ">
+                                  Are you willing to pass a pre-employment drug
+                                  test?
+                                </label>
                                 <select
                                   onChange={(e) =>
                                     setDrugTestAgreement(e.target.value)
@@ -362,13 +354,10 @@ else
                                   className="mt-1 mb-2 py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                 >
                                   <option selected="">
-                                  Select your answer
+                                    Select your answer
                                   </option>
-                                  <option value="Yes">
-                                    Yes
-                                  </option>
+                                  <option value="Yes">Yes</option>
                                   <option value="No">No</option>
-                     
                                 </select>
                                 {drugValidation && (
                                   <p className="text-red-500 text-sm">
@@ -377,10 +366,13 @@ else
                                 )}
                               </div>
                             </div>
-                            
+
                             <div className="relative col-span-full">
                               <div className="relative">
-                                <label className="text-gray-800 text-sm font-semibold mb-2 ">Are you willing to pass a State and/or Federal background check?</label>
+                                <label className="text-gray-800 text-sm font-semibold mb-2 ">
+                                  Are you willing to pass a State and/or Federal
+                                  background check?
+                                </label>
                                 <select
                                   onChange={(e) =>
                                     setBackgroundCheckAgreement(e.target.value)
@@ -388,13 +380,10 @@ else
                                   className="mt-1 py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none "
                                 >
                                   <option selected="">
-                                  Select your answer
+                                    Select your answer
                                   </option>
-                                  <option value="Yes">
-                                    Yes
-                                  </option>
+                                  <option value="Yes">Yes</option>
                                   <option value="No">No</option>
-                     
                                 </select>
                                 {backgroundValidation && (
                                   <p className="text-red-500 text-sm">
@@ -403,15 +392,19 @@ else
                                 )}
                               </div>
                             </div>
-                          </div>
-                        )}
-
-<div className="max-w-sm mt-3 sm:mt-5">
-  <form>
-  <label className="text-gray-800 text-sm font-semibold mb-2 ">Please upload a copy of your resume.</label>
-    <label className="block mt-2">
-      <span className="sr-only">Please upload your resume</span>
-      <input type="file" accept=".pdf" className="block w-full text-sm text-gray-500
+                            <div className="max-w-sm mt-3 sm:mt-5">
+                              <form>
+                                <label className="text-gray-800 text-sm font-semibold mb-2 ">
+                                  Please upload a copy of your resume.
+                                </label>
+                                <label className="mt-2 flex items-center">
+                                  <span className="sr-only">
+                                    Please upload your resume
+                                  </span>
+                                  <input
+                                    type="file"
+                                    accept=".pdf"
+                                    className="block w-full text-sm text-gray-500
         file:me-4 file:py-2 file:px-4
         file:rounded-lg file:border-0
         file:text-sm file:font-semibold
@@ -420,18 +413,28 @@ else
         file:disabled:opacity-50 file:disabled:pointer-events-none
       
       "
-      onChange={(event) =>
-              uploadResumeToFirebase(event.target.files[0])
-            } />
-    </label>
-  </form>
-  {resumeValidation && (
-                                  <p className="text-red-500 text-sm">
-                                    {resumeValidation}
-                                  </p>
-                                )}
-</div>
+                                    onChange={(event) =>
+                                      uploadResumeToFirebase(
+                                        event.target.files[0]
+                                      )
+                                    }
+                                  />
 
+                                  {resume ? ( <svg xmlns="http://www.w3.org/2000/svg" fill="#43a047" viewBox="0 0 24 24" strokeWidth={1.5} stroke="white" className="size-7">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+</svg>) : (null)}
+                                 
+
+                                </label>
+                              </form>
+                              {resumeValidation && (
+                                <p className="text-red-500 text-sm">
+                                  {resumeValidation}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        )}
 
                         <div className="mt-7">
                           {success ? (
@@ -454,13 +457,17 @@ else
                             </button>
                           ) : (
                             <>
-                            <button
-                              onClick={handleCheckValidation}
-                              className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                            >
-                              Find a match
-                            </button>
-                            <p className="text-gray-500 text-sm mt-2">By submitting this information, you consent to receive calls and emails from Fulfil Inc. and potential employers regarding CDL training.</p>
+                              <button
+                                onClick={handleCheckValidation}
+                                className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                              >
+                                Find a match
+                              </button>
+                              <p className="text-gray-500 text-sm mt-2">
+                                By submitting this information, you consent to
+                                receive calls and emails from Fulfil Inc. and
+                                potential employers regarding CDL training.
+                              </p>
                             </>
                           )}
                         </div>
